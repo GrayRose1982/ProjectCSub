@@ -11,11 +11,13 @@ namespace Factory
 {
 	public class Builder : MonoBehaviour
 	{
-		[SerializeField] private PartData[] Cache;
+		[SerializeField] private PartData[] cache;
 		[Header("Part builder")]
 		public PartBuilder BodyBuilder;
 
-		public void Init()
+		public PartData[] Cache => cache;
+
+        public void Init()
 		{
 			StartBuildAircraft();
         }
@@ -23,14 +25,14 @@ namespace Factory
         public void StartBuildAircraft(PartData[] newParts = null)
         {
             if (newParts != null)
-                Cache = newParts;
+                cache = newParts;
 
             BodyBuilder = GetComponent<PartBuilder>();
             if (!BodyBuilder)
                 BodyBuilder = gameObject.AddComponent<PartBuilder>();
             
-            BodyBuilder.CurPart = Cache.GetPath(TypePart.Body);
-            BodyBuilder.AddSub(false, Cache);
+            BodyBuilder.CurPart = cache.GetPath(TypePart.Body);
+            BodyBuilder.AddSub(false, cache);
             UpdatePosition();
         }
 

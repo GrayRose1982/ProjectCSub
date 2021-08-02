@@ -35,8 +35,15 @@ namespace Factory
             if (GUILayout.Button("Update position"))
                 t.UpdatePosition();
 
-            if (GUILayout.Button("Create link"))
+            if (GUILayout.Button("Save data"))
             {
+	            for (int i = 0; i < t.Cache.Length; i++)
+	            {
+		            EditorUtility.SetDirty(t.Cache[i]);
+	            }
+
+	            AssetDatabase.SaveAssets();
+	            AssetDatabase.Refresh();
             }
         }
 
